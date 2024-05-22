@@ -1,7 +1,7 @@
 import re
 from marshmallow import ValidationError
-from werkzeug.security import check_password_hash
 from app.models.user import User
+from app import bcrypt
 
 
 def validate_password(password: str) -> None:
@@ -10,13 +10,11 @@ def validate_password(password: str) -> None:
     """
     
     if not re.search(r'[A-Z]', password):
-        raise ValidationError("""Password must contain at
-                              least one uppercase letter.""")
+        raise ValidationError("Password must contain at least one uppercase letter.")
     if not re.search(r'\d', password):
         raise ValidationError("Password must contain at least one number.")
     if not re.search(r'[!@#$%^&*(),.?":{}|<>]', password):
-        raise ValidationError("""Password must contain at
-                              least one special character.""")
+        raise ValidationError("Password must contain at least one special character.")
         
 def validate_email(email):
     """Email Validator"""
@@ -35,5 +33,5 @@ def validate_credentials(data):
     if not user:
         raise ValidationError("Invalid username or password.")
 
-    if not check_password_hash(user.password, password):
+    if not bcrypt.check_password_hash(user.password, password):
         raise ValidationError("Invalid username or password.")
