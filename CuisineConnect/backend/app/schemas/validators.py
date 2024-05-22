@@ -2,6 +2,7 @@ import re
 from marshmallow import ValidationError
 from app.models.user import User
 from app import bcrypt
+from app.models.user import User
 
 
 def validate_password(password: str) -> None:
@@ -22,6 +23,17 @@ def validate_email(email):
     email_regex = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
     if not re.match(email_regex, email):
         raise ValidationError("Invalid email address.")
+    
+    user = User.query.filter_by(email=email).first()
+    if user:
+        raise ValidationError("Email already exists.")
+
+def validate_username(username):
+    """Email Validator"""
+    
+    user = User.query.filter_by(username=username).first()
+    if user:
+        raise ValidationError("Username already taken.")
 
 def validate_credentials(data):
     """Credential Validator"""
