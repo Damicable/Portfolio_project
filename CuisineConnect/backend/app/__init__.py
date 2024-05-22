@@ -1,5 +1,6 @@
 from app.db import db
 from flask import Flask
+from flask_cors import CORS
 from app.config import Config
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
@@ -15,7 +16,7 @@ def create_app():
     Creates app to run flask.
     """
     app = Flask(__name__)
-    
+    CORS(app)
     app.config.from_object(Config)
     db.init_app(app)
     bcrypt.init_app(app)
