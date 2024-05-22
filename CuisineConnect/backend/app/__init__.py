@@ -10,8 +10,16 @@ def create_app():
     app = Flask(__name__)
     
     app.config.from_object(Config)
+    db.init_app(app)
     
     with app.app_context():
-        db.init_app(app)
+        from app.auth.routes import auth_bp
+        
+        
+        app.register_blueprint(auth_bp)
+        
+        
+        db.create_all()
+    
     
     return app
