@@ -2,7 +2,6 @@ import re
 from marshmallow import ValidationError
 from app.models.user import User
 from app import bcrypt
-from app.models.user import User
 
 
 def validate_password(password: str) -> None:
