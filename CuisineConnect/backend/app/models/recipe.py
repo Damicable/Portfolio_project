@@ -12,3 +12,7 @@ class Recipe(db.Model):
     ingredients = db.Column(db.Text, nullable=True)
     instructions = db.Column(db.Text, nullable=True)
     timestamp = db.Column(db.DateTime, default=datetime.now())
+    likes = db.relationship('Like', backref='recipe',
+                            lazy=True, cascade="all, delete-orphan")
+    comments = db.relationship('Comment', backref='recipe',
+                               lazy=True, cascade="all, delete-orphan")

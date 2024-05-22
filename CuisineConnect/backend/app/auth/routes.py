@@ -1,7 +1,8 @@
 from flask import Blueprint, request, jsonify
 from app.models.user import User
 from app.db import db
-from app.schemas.auth_schemas import user_schema, login_schema
+from app.schemas import user_schema
+from app.schemas.auth_schemas import login_schema
 from app.utils import hash_password
 from flask_login import login_user, logout_user, login_required, current_user
 

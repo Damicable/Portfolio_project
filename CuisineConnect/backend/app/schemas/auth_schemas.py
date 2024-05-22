@@ -23,6 +23,5 @@ class LoginSchema(Schema):
     @validates_schema
     def validate_user(self, data, **kwargs):
         validate_credentials(data)
-    
-user_schema = UserSchema()
+
 login_schema = LoginSchema()

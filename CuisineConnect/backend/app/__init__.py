@@ -24,9 +24,13 @@ def create_app():
     with app.app_context():
         from app.auth.routes import auth_bp
         from app.routes.recipe_routes import recipes_bp
+        from app.routes.comment_routes import comment_bp
+        from app.routes.like_routes import like_bp
         
         app.register_blueprint(auth_bp)
         app.register_blueprint(recipes_bp)
+        app.register_blueprint(comment_bp)
+        app.register_blueprint(like_bp)
         
         
         db.create_all()

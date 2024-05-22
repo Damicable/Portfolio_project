@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app import db
 from app.models.recipe import Recipe
-from app.schemas.recipe_schema import recipe_schema, recipes_schema
+from app.schemas import recipe_schema, recipes_schema
 
 recipes_bp = Blueprint('recipes', __name__)
 
