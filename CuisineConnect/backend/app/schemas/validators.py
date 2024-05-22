@@ -26,7 +26,7 @@ def validate_email(email):
     
     user = User.query.filter_by(email=email).first()
     if user:
-        raise ValidationError("Email already exists.")
+        raise ValidationError("Email already taken.")
 
 def validate_username(username):
     """Email Validator"""

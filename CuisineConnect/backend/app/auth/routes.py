@@ -2,7 +2,8 @@ from flask import Blueprint, request, jsonify
 from app.models.user import User
 from app.db import db
 from app.schemas.auth_schemas import user_schema, login_schema
-from app.utils import generate_token, hash_password
+from app.utils import hash_password
+from flask_login import login_user, logout_user, login_required, current_user
 
 auth_bp = Blueprint('auth', __name__)
 
@@ -36,7 +37,16 @@ def login():
     if errors:
         return jsonify(errors), 400
 
-    user = User.query.filter_by(username=data['username']).first()
+    user = User.query.filter_by(username=data.get('username')).first()
     
-    token = generate_token(user)
-    return jsonify({"message": "Login successful", "token": token}), 200
+    login_user(user)
+    
+    return jsonify({"message": "Login successful"}), 200
+
+@auth_bp.route('/auth/logout', methods=['POST'])
+@login_required
+def logout():
+    """Logout Route"""
+    
+    logout_user()
+    return jsonify({"message": "Logout successful"}), 200
