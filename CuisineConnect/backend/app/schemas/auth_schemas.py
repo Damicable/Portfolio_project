@@ -14,6 +14,7 @@ class UserSchema(Schema):
     password = fields.Str(load_only=True, required=True,
                           validate=[validate.Length(min=8),
                                     validate_password])
+    recipes = fields.List(fields.Nested('RecipeSchema', exclude=('author',)))
 
 class LoginSchema(Schema):
     username = fields.Str(required=True, validate=validate.Length(min=3))
