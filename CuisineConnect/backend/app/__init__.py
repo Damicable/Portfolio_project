@@ -1,5 +1,5 @@
-from flask import Flask
 from app.db import db
+from flask import Flask
 from app.config import Config
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager

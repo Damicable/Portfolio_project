@@ -1,5 +1,5 @@
-from datetime import datetime
 from app.db import db
+from datetime import datetime
 
 
 class Recipe(db.Model):

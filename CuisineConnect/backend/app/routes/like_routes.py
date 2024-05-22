@@ -1,8 +1,8 @@
-from flask import Blueprint, request, jsonify
-from flask_login import login_required, current_user
 from app.db import db
-from app.models.recipe import Recipe
 from app.models.like import Like
+from app.models.recipe import Recipe
+from flask import Blueprint, jsonify
+from flask_login import login_required, current_user
 
 like_bp = Blueprint('likes', __name__)
 

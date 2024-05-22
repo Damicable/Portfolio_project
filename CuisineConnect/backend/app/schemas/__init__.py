@@ -4,11 +4,12 @@ from .comment_schemas import CommentSchema
 from .like_schemas import LikeSchema
 
 
-user_schema = UserSchema()
-users_schema = UserSchema(many=True)
-recipe_schema = RecipeSchema()
-recipes_schema = RecipeSchema(many=True)
-comment_schema = CommentSchema()
-comments_schema = CommentSchema(many=True)
 like_schema = LikeSchema()
+user_schema = UserSchema()
+recipe_schema = RecipeSchema()
+comment_schema = CommentSchema()
+
 likes_schema = LikeSchema(many=True)
+users_schema = UserSchema(many=True)
+recipes_schema = RecipeSchema(many=True)
+comments_schema = CommentSchema(many=True)

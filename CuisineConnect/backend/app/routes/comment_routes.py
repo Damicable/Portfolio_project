@@ -1,7 +1,7 @@
-from flask import Blueprint, request, jsonify
-from flask_login import login_required, current_user
 from app.db import db
 from app.models.comment import Comment
+from flask import Blueprint, request, jsonify
+from flask_login import login_required, current_user
 from app.schemas import comment_schema, comments_schema
 
 comment_bp = Blueprint('comments', __name__)

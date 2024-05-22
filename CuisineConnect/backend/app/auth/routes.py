@@ -1,10 +1,10 @@
-from flask import Blueprint, request, jsonify
-from app.models.user import User
 from app.db import db
-from app.schemas import user_schema
-from app.schemas.auth_schemas import login_schema
+from app.models.user import User
 from app.utils import hash_password
-from flask_login import login_user, logout_user, login_required, current_user
+from app.schemas import user_schema
+from flask import Blueprint, request, jsonify
+from app.schemas.auth_schemas import login_schema
+from flask_login import login_user, logout_user, login_required
 
 
 auth_bp = Blueprint('auth', __name__)
