@@ -34,9 +34,9 @@ CuisineConnect is a web application that allows users to share, browse, and disc
         or
         `python3 run.py`
 
-## API ENDPOINTS
+## API Endpoints
 
-### AUTHENTICATION
+### Authentication
 
 * Register a new user
 
@@ -53,7 +53,7 @@ CuisineConnect is a web application that allows users to share, browse, and disc
   * Endpoint: `POST /auth/logout`
   * Description: Allows a logged-in user to log out.
 
-### RECIPE
+### Recipe
 
 * Create a new recipe
 
@@ -80,7 +80,7 @@ CuisineConnect is a web application that allows users to share, browse, and disc
   * Endpoint: `GET /recipes`
   * Description: Retrieve the details of all recipes.
 
-### LIKE
+### Like
 
 * Like a recipe
 
@@ -92,7 +92,7 @@ CuisineConnect is a web application that allows users to share, browse, and disc
   * Endpoint: `DELETE /recipes/{recipe_id}/unlike`
   * Description: Allows a logged-in user to unlike a specific recipe.
 
-### COMMENT
+### Comment
 
 * Add a comment to a recipe
 
