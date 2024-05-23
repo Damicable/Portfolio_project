@@ -16,7 +16,7 @@ CuisineConnect is a web application that allows users to share, browse, and disc
 
     * HTTPS:
 
-        `git clone https://github.com/Damicable/Portfolio_project.git`
+        ```git clone https://github.com/Damicable/Portfolio_project.git```
 
     * SSH:
 
@@ -33,3 +33,73 @@ CuisineConnect is a web application that allows users to share, browse, and disc
         `flask run`
         or
         `python3 run.py`
+
+## API ENDPOINTS
+
+### AUTHENTICATION
+
+* Register a new user
+
+  * Endpoint: `POST /auth/register`
+  * Description: Allows a new user to register by providing a username, email, and password.
+
+* Log in a user
+
+  * Endpoint: `POST /auth/login`
+  * Description: Allows a registered user to log in by providing their username and password.
+
+* Log out a user
+
+  * Endpoint: `POST /auth/logout`
+  * Description: Allows a logged-in user to log out.
+
+### RECIPE
+
+* Create a new recipe
+
+  * Endpoint: `POST /recipes`
+  * Description: Allows a logged-in user to create a new recipe.
+
+* Update an existing recipe
+
+  * Endpoint: `PUT /recipes/{id}`
+  * Description: Allows a logged-in user to update their own recipe.
+
+* Delete an existing recipe
+
+  * Endpoint: `DELETE /recipes/{id}`
+  * Description: Allows a logged-in user to delete their own recipe.
+
+* Retrieve details of a specific recipe
+
+  * Endpoint: `GET /recipes/{id}`
+  * Description: Retrieve the details of a specific recipe by its ID.
+
+* Retrieve details of all recipes
+
+  * Endpoint: `GET /recipes`
+  * Description: Retrieve the details of all recipes.
+
+### LIKE
+
+* Like a recipe
+
+  * Endpoint: `POST /recipes/{recipe_id}/like`
+  * Description: Allows a logged-in user to like a specific recipe.
+
+* Unlike a recipe
+
+  * Endpoint: `DELETE /recipes/{recipe_id}/unlike`
+  * Description: Allows a logged-in user to unlike a specific recipe.
+
+### COMMENT
+
+* Add a comment to a recipe
+
+  * Endpoint: `POST /recipes/{recipe_id}/comments`
+  * Description: Allows a logged-in user to add a comment to a specific recipe.
+
+* Retrieve all comments for a recipe
+
+  * Endpoint: `GET /recipes/{recipe_id}/comments`
+  * Description: Retrieve all comments for a specific recipe.
