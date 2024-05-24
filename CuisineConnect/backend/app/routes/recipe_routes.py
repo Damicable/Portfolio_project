@@ -1,4 +1,4 @@
-from app import db
+from app.db import db
 from app.models.recipe import Recipe
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
@@ -10,6 +10,8 @@ recipes_bp = Blueprint('recipes', __name__)
 @recipes_bp.route('/recipes', methods=['POST'])
 @login_required
 def create_recipe():
+    """Creates a Recipe"""
+    
     data = request.get_json()
     errors = recipe_schema.validate(data)
     if errors:
@@ -31,6 +33,8 @@ def create_recipe():
 @recipes_bp.route('/recipes/<int:id>', methods=['PUT'])
 @login_required
 def update_recipe(id):
+    """Updates a Recipe of id"""
+    
     recipe = Recipe.query.get_or_404(id)
 
     if recipe.user_id != current_user.id:
@@ -53,6 +57,8 @@ def update_recipe(id):
 @recipes_bp.route('/recipes/<int:id>', methods=['DELETE'])
 @login_required
 def delete_recipe(id):
+    """Deletes a Recipe"""
+    
     recipe = Recipe.query.get_or_404(id)
 
     if recipe.user_id != current_user.id:
@@ -64,13 +70,19 @@ def delete_recipe(id):
     return jsonify({"message": "Recipe deleted"}), 200
 
 @recipes_bp.route('/recipes/<int:id>', methods=['GET'])
+@login_required
 def get_recipe(id):
+    """Gets a particular recipe"""
+    
     recipe = Recipe.query.get_or_404(id)
     
     return jsonify(recipe_schema.dump(recipe)), 200
 
 @recipes_bp.route('/recipes', methods=['GET'])
+@login_required
 def get_recipes():
+    """Gets all recipes"""
+    
     recipes = Recipe.query.all()
     
     return jsonify(recipes_schema.dump(recipes)), 200
