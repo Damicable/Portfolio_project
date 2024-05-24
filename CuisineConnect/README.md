@@ -17,30 +17,31 @@ CuisineConnect is a web application that allows users to share, browse, and disc
     * HTTPS:
 
       ```bash
-        `git clone https://github.com/Damicable/Portfolio_project.git`
+          git clone https://github.com/Damicable/Portfolio_project.git
 
     * SSH:
 
       ```bash
-        `git clone git@github.com:Damicable/Portfolio_project.git`
+        git clone git@github.com:Damicable/Portfolio_project.git
 
 2. **Set up a virtual enviroment and activate:**
 
       ```bash
-        `python3 -m venv venv`
-        `source venv/bin/activate`
+        python3 -m venv ven
+        source venv/bin/activate
 
 3. **Install backend dependencies:**
 
       ```bash
-        `pip install -r requirements.txt`
+      pip install -r requirements.txt
 
 4. **Run the backend server:**
 
       ```bash
-        `flask run`
-        or
-        `python3 run.py`
+        flask run
+
+      ```bash
+        python3 run.py
 
 ## API ENDPOINTS
 
