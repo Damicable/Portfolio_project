@@ -25,3 +25,4 @@ bcrypt = Bcrypt(app)
 
 from app.models import *
 from app.routes import *
+from app.controllers import *
