@@ -40,7 +40,8 @@ CuisineConnect is a web application that allows users to share, browse, and disc
       ```bash
         flask run
 
-      ```bash
+        or
+
         python3 run.py
 
 ## API ENDPOINTS
