@@ -1,5 +1,6 @@
 from app.db import db
 from app.models.comment import Comment
+from app.models.recipe import Recipe
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.schemas import comment_schema, comments_schema
@@ -9,6 +10,9 @@ comment_bp = Blueprint('comments', __name__)
 @comment_bp.route('/recipes/<int:recipe_id>/comments', methods=['POST'])
 @login_required
 def add_comment(recipe_id):
+    
+    recipe = Recipe.query.get_or_404(recipe_id)
+    
     data = request.get_json()
     content = data.get('content')
 
