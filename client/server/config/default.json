@@ -1,5 +1,0 @@
-{
-	"jwtPrivateKey": "",
-  
-  "db": "mongodb://localhost/foodshare"
-}
