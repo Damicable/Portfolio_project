@@ -15,6 +15,5 @@ class Config:
     
     SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{username}:{password}@{host}/{db_name}'
     SECRET_KEY = getenv('SECRET_KEY')
-    JWT_EXPIRATION_DELTA = int(getenv('JWT_EXPIRATION_DELTA', 3600))
 
 config = Config()

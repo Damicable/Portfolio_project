@@ -9,7 +9,7 @@ from flask_login import login_user, logout_user, login_required
 
 auth_bp = Blueprint('auth', __name__)
 
-@auth_bp.route('/auth/register', methods=['POST'])
+@auth_bp.route('/register', methods=['POST'])
 def register():
     """ Register Route"""
     
@@ -20,7 +20,9 @@ def register():
         return jsonify(errors), 400
     
     hashed_pwd = hash_password(data.get('password'))
-    user = User(username=data.get('username'),
+    user = User(first_name=data.get('first_name'),
+                last_name=data.get('last_name'),
+                username=data.get('username'),
                 email=data.get('email'),
                 password=hashed_pwd)
     db.session.add(user)
@@ -30,7 +32,7 @@ def register():
     
     return jsonify(new_user), 201
 
-@auth_bp.route('/auth/login', methods=['POST'])
+@auth_bp.route('/login', methods=['POST'])
 def login():
     """Login Route"""
     
@@ -44,7 +46,7 @@ def login():
     login_user(user)
     return jsonify({"message": "Login successful"}), 200
 
-@auth_bp.route('/auth/logout', methods=['POST'])
+@auth_bp.route('/logout', methods=['POST'])
 @login_required
 def logout():
     """Logout Route"""

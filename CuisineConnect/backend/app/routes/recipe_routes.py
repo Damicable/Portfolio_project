@@ -1,8 +1,12 @@
 from app.db import db
+from app.models.tag import Tag
 from app.models.recipe import Recipe
+from app.controller import createNewRecipe, updateRecipe
+from app.models.ingredient import Ingredient
 from flask import Blueprint, request, jsonify
 from flask_login import login_required, current_user
 from app.schemas import recipe_schema, recipes_schema
+from app.models.recipe import Recipe, RecipeIngredient, RecipeTag
 
 
 recipes_bp = Blueprint('recipes', __name__)
@@ -17,16 +21,7 @@ def create_recipe():
     if errors:
         return jsonify(errors), 400
 
-    new_recipe = Recipe(
-        title=data['title'],
-        description=data['description'],
-        ingredients=data['ingredients'],
-        instructions=data['instructions'],
-        user_id=current_user.id
-    )
-
-    db.session.add(new_recipe)
-    db.session.commit()
+    new_recipe = createNewRecipe(data, current_user)
     
     return jsonify(recipe_schema.dump(new_recipe)), 201
 
@@ -45,12 +40,7 @@ def update_recipe(id):
     if errors:
         return jsonify(errors), 400
 
-    recipe.title = data['title']
-    recipe.description = data['description']
-    recipe.ingredients = data['ingredients']
-    recipe.instructions = data['instructions']
-
-    db.session.commit()
+    updateRecipe(recipe, data)
 
     return jsonify(recipe_schema.dump(recipe)), 200
 

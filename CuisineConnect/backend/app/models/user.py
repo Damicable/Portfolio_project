@@ -8,15 +8,18 @@ def load_user(user_id):
 
 class User(db.Model, UserMixin):
     """
-    User model for user tabel in the db
+    User model for user table in the db
     """
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
+    first_name = db.Column(db.String(128), nullable=False)
+    last_name = db.Column(db.String(128), nullable=False)
+    username = db.Column(db.String(64), unique=True, nullable=False)
+    email = db.Column(db.String(128), unique=True, nullable=False)
+    password = db.Column(db.String(128), nullable=False)
+    bio = db.Column(db.Text, nullable=True)
     recipes = db.relationship('Recipe', backref='author',
-                              lazy=True, cascade="all, delete-orphan")
-    comments = db.relationship('Comment', backref='author',
-                               lazy=True, cascade="all, delete-orphan")
+                              lazy=True, cascade="all, delete")
+    comments = db.relationship('Comment', backref='commentor',
+                               lazy=True, cascade="all, delete")
     likes = db.relationship('Like', backref='user',
-                            lazy=True, cascade="all, delete-orphan")
+                            lazy=True, cascade="all, delete")

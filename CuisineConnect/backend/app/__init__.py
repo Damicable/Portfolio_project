@@ -23,6 +23,10 @@ def create_app():
     login_manager.init_app(app)
     
     with app.app_context():
+        from app.models.recipe import Recipe, RecipeIngredient, RecipeTag
+        from app.models.ingredient import Ingredient
+        from app.models.tag import Tag
+        
         from app.auth.routes import auth_bp
         from app.routes.recipe_routes import recipes_bp
         from app.routes.comment_routes import comment_bp

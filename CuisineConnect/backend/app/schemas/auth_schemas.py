@@ -9,6 +9,8 @@ from .validators import (
 
 class UserSchema(Schema):
     id = fields.Int(dump_only=True)
+    first_name = fields.Str(required=True)
+    last_name = fields.Str(required=True)
     username = fields.Str(required=True, validate=[validate.Length(min=3),
                                                    validate_username])
     email = fields.Email(required=True, validate=validate_email)
@@ -16,6 +18,7 @@ class UserSchema(Schema):
                           validate=[validate.Length(min=8),
                                     validate_password])
     confirm_password = fields.Str(required=True)
+    bio = fields.Str()
     recipes = fields.List(fields.Nested('RecipeSchema', exclude=('author',)))
     
     @validates_schema
