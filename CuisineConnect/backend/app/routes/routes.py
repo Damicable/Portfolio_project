@@ -12,7 +12,7 @@ from flask_jwt_extended import (
 )
 
 from app import app, bcrypt
-from app.models import *
+from app.models import User, Recipe, Ingredient, Tag, Collection, Collection_Recipe, Comment user_collection
 
 
 @app.route("/api/users", methods=["GET", "POST"])
