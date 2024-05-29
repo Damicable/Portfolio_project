@@ -5,7 +5,7 @@ class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     english_name = db.Column(db.String(128), unique=True, nullable=False)
     recipes = db.relationship(
-        "Recipe_Ingredient", backref=db.backref("ingredient", uselist=False), lazy=True
+        "RecipeIngredient", backref=db.backref("ingredient", uselist=False), lazy=True
     )
 
     def to_dict(self):
@@ -43,7 +43,7 @@ class User(db.Model):
 
 
 Recipe_Tag = db.Table(
-    "recipe__tag",
+    "recipe_tag",
     db.Column("id", db.Integer, primary_key=True),
     db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), nullable=False),
     db.Column("recipe_id", db.Integer, db.ForeignKey("recipe.id"), nullable=False),
@@ -53,7 +53,7 @@ Recipe_Tag = db.Table(
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), nullable=False, unique=True)
-    header_image = db.Column(db.Blob(), nullable = False)
+    header_image = db.Column(db.String(128), nullable = True)
     prep_time = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
     difficulty = db.Column(db.Integer, nullable=False)
@@ -62,7 +62,7 @@ class Recipe(db.Model):
     unit = db.Column(db.String(64), nullable=False)
     contributor_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     steps = db.relationship(
-        "Recipe_Step",
+        "RecipeStep",
         backref=db.backref("recipe", uselist=False),
         cascade="all, delete",
         lazy=True,
@@ -71,7 +71,7 @@ class Recipe(db.Model):
         "Tag", backref="recipes", secondary=Recipe_Tag, cascade="all, delete", lazy=True
     )
     ingredients = db.relationship(
-        "Recipe_Ingredient",
+        "RecipeIngredient",
         backref=db.backref("recipe", uselist=False),
         cascade="all, delete",
         lazy=False,
@@ -105,7 +105,7 @@ class Tag(db.Model):
 
 
 Collection_Recipe = db.Table(
-    "collection__recipe",
+    "collection_recipe",
     db.Column("id", db.Integer, primary_key=True),
     db.Column(
         "collection_id", db.Integer, db.ForeignKey("collection.id"), nullable=False

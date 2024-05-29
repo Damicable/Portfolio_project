@@ -1,6 +1,10 @@
 from app import db, bcrypt
-from app.models import User, Recipe, Ingredient, Recipe_Step, Recipe_Tag, Recipe_Step, Recipe_Ingredient, Collection, Comment
-from app.models import Tag
+from app.models import (
+    User, Recipe,
+    Ingredient, RecipeStep,
+    Recipe_Tag, RecipeIngredient,
+    Collection, Comment, Tag
+    )
 
 
 def add_full_recipe(new_recipe_full: dict, contributor_id: int, recipe_id=None):
@@ -35,7 +39,7 @@ def add_full_recipe(new_recipe_full: dict, contributor_id: int, recipe_id=None):
 
     # Add recipe steps
     for step in new_recipe_full["recipe_steps"]:
-        recipe_step = Recipe_Step(
+        recipe_step = RecipeStep(
             recipe_id=recipe_id,
             serial_number=step["serial_number"],
             instruction=step["instruction"]
@@ -61,7 +65,7 @@ def add_full_recipe(new_recipe_full: dict, contributor_id: int, recipe_id=None):
             db.session.add(new_ingredient)
             db.session.commit()
         
-        recipe_ingredient = Recipe_Ingredient(
+        recipe_ingredient = RecipeIngredient(
             recipe_id=recipe_id,
             ingredient_id=new_ingredient.id,
             quantity=ingredient["quantity"],

@@ -4,8 +4,8 @@ import mysql.connector
 connection = mysql.connector.connect(
     host= 'localhost',
     user= 'root',
-    passwd= '2024**',
-    database= 'cuisine_dev'
+    passwd= 'Mi94ch12ae07l',
+    database= 'cuisine_dev_db2'
 )
 
 cursor = connection.cursor()

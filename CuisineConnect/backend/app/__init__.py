@@ -23,6 +23,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 
-from app.models import *
-from app.routes import *
-from app.controllers import *
+with app.app_context():
+    from app.models import *
+    from app.routes import *
+    from app.controllers import *
+    
+    db.create_all()

@@ -11,8 +11,20 @@ from flask_jwt_extended import (
     jwt_required,
 )
 
-from app import app, bcrypt
-from app.models import User, Recipe, Ingredient, Tag, Collection, Collection_Recipe, Comment user_collection
+from app import app, bcrypt, db
+from app.controllers import (
+    add_full_recipe,
+    edit_recipe,
+    add_new_user,
+    get_recipe_by_id,
+    get_recipe_tags,
+    get_recipe_meta,
+    get_recipe_ingredients,
+    get_recipe_steps,
+    get_recipe_full,
+    get_comments_tree_for_recipe
+)
+from app.models import User, Recipe, Ingredient, Tag, Collection, Collection_Recipe, Comment
 
 
 @app.route("/api/users", methods=["GET", "POST"])
@@ -22,7 +34,7 @@ def users():
         user = User.query.filter(User.username == newUser["username"]).first()
         print(newUser)
         if user is None:
-            addNewUser(newUser)
+            add_new_user(newUser)
             return Response(status=201)
         else:
             return Response(status=201)
@@ -95,7 +107,7 @@ def user_str_recipes(username):
         return jsonify(
             {
                 "recipes": [
-                    getRecipeMeta(recipe)
+                    get_recipe_meta(recipe)
                     for recipe in Recipe.query.filter(
                         Recipe.contributor.has(User.username == user.username)
                     )
@@ -113,7 +125,7 @@ def user_str_recipes_full(username):
         return jsonify(
             {
                 "recipes": [
-                    getRecipeFull(recipe)
+                    get_recipe_full(recipe)
                     for recipe in Recipe.query.filter(
                         Recipe.contributor.has(User.username == user.username)
                     )
@@ -136,7 +148,7 @@ def user_collections():
                     "collections": [
                         {
                             "name": c.name,
-                            "recipes": [getRecipeMeta(r) for r in c.recipes],
+                            "recipes": [get_recipe_meta(r) for r in c.recipes],
                         }
                         for c in user.collections
                     ]
@@ -189,7 +201,7 @@ def user_collection(collection_name):
         abort(404)
     if request.method == "GET":
         return jsonify(
-            {"recipes": [getRecipeMeta(recipe) for recipe in collection.recipes]}
+            {"recipes": [get_recipe_meta(recipe) for recipe in collection.recipes]}
         )
     if request.method == "POST":
         recipe_id = request.json.get("recipe_id", None)
@@ -233,23 +245,23 @@ def recipes():
     if user is None:
         return Response(status=400)
     else:
-        addFullRecipe(newRecipeFull, user.id)
+        add_full_recipe(newRecipeFull, user.id)
         return Response(status=201)
 
 
 @app.route("/api/recipes/<int:num>", methods=["GET"])
 def recipes_n(num):
-    r = getRecipeById(num)
+    r = get_recipe_by_id(num)
     if r is None:
         abort(404)
     else:
-        return jsonify(getRecipeMeta(r))
+        return jsonify(get_recipe_meta(r))
 
 
 @app.route("/api/recipes/<int:num>", methods=["PATCH", "DELETE"])
 @jwt_required()
 def recipes_n_path_delete(num):
-    r = getRecipeById(num)
+    r = get_recipe_by_id(num)
     username = get_jwt_identity()
     user = User.query.filter(User.username == username).first()
     if r is None or user is None or user.username != r.contributor.username:
@@ -257,7 +269,7 @@ def recipes_n_path_delete(num):
     else:
         if request.method == "PATCH":
             newRecipeFull = request.get_json(force=True)
-            editRecipe(newRecipeFull, r, user)
+            edit_recipe(newRecipeFull, r, user)
             return Response(status=200)
         if request.method == "DELETE":
             db.session.delete(r)
@@ -267,38 +279,38 @@ def recipes_n_path_delete(num):
 
 @app.route("/api/recipes/<int:num>/tags")
 def recipes_n_tags(num):
-    r = getRecipeById(num)
+    r = get_recipe_by_id(num)
     if r is None:
         abort(404)
     else:
-        return jsonify({"tags": getRecipeTags(r)})
+        return jsonify({"tags": get_recipe_tags(r)})
 
 
 @app.route("/api/recipes/<int:num>/ingredients")
 def recipes_n_ingredients(num):
-    r = getRecipeById(num)
+    r = get_recipe_by_id(num)
     if r is None:
         abort(404)
     else:
-        return jsonify({"name": r.name, "recipe_ingredients": getRecipeIngredients(r)})
+        return jsonify({"name": r.name, "recipe_ingredients": get_recipe_ingredients(r)})
 
 
 @app.route("/api/recipes/<int:num>/steps")
 def recipes_n_steps(num):
-    r = getRecipeById(num)
+    r = get_recipe_by_id(num)
     if r is None:
         abort(404)
     else:
-        return jsonify({"name": r.name, "recipe_steps": getRecipeSteps(r)})
+        return jsonify({"name": r.name, "recipe_steps": get_recipe_steps(r)})
 
 
 @app.route("/api/recipes/<int:num>/full")
 def recipes_n_full(num):
-    r = getRecipeById(num)
+    r = get_recipe_by_id(num)
     if r is None:
         abort(404)
     else:
-        return jsonify(getRecipeFull(r))
+        return jsonify(get_recipe_full(r))
 
 
 @app.route("/api/recipes/count")
@@ -309,7 +321,7 @@ def recipes_count():
 @app.route("/api/recipes/all")
 def recipes_all():
     return jsonify(
-        {"recipes": [getRecipeMeta(recipe) for recipe in Recipe.query.all()]}
+        {"recipes": [get_recipe_meta(recipe) for recipe in Recipe.query.all()]}
     )
 
 
@@ -318,7 +330,7 @@ def recipes_bytag(tag):
     return jsonify(
         {
             "recipes": [
-                getRecipeMeta(r)
+                get_recipe_meta(r)
                 for r in Tag.query.filter(Tag.name == tag).first().recipes
             ]
         }
@@ -370,9 +382,9 @@ def add_comment(recipe_id):
 
 @app.route("/api/recipes/<int:recipe_id>/comments")
 def get_recipe_comments(recipe_id):
-    r = getRecipeById(recipe_id)
+    r = get_recipe_by_id(recipe_id)
     if r is None:
         abort(404)
     else:
-        comments = getCommentsTreeForRecipe(r)
+        comments = get_comments_tree_for_recipe(r)
         return jsonify({"comments": comments})
