@@ -13,16 +13,17 @@ from flask_jwt_extended import (
 
 from app import app, bcrypt
 from app.models import User, Recipe, Ingredient, Tag, Collection, Collection_Recipe, Comment user_collection
+from app.controllers import add_new_user
 
 
 @app.route("/api/users", methods=["GET", "POST"])
 def users():
     if request.method == "POST":
-        newUser = request.get_json(force=True)
-        user = User.query.filter(User.username == newUser["username"]).first()
-        print(newUser)
+        new_user = request.get_json(force=True)
+        user = User.query.filter(User.username == new_user["username"]).first()
+        print(new_user)
         if user is None:
-            addNewUser(newUser)
+            addNewUser(new_user)
             return Response(status=201)
         else:
             return Response(status=201)
@@ -131,17 +132,7 @@ def user_collections():
         abort(404)
     else:
         if request.method == "GET":
-            return jsonify(
-                {
-                    "collections": [
-                        {
-                            "name": c.name,
-                            "recipes": [getRecipeMeta(r) for r in c.recipes],
-                        }
-                        for c in user.collections
-                    ]
-                }
-            )
+            return get_user_collections(user)
         if request.method == "POST":
             collection_name = request.json.get("collection_name", None)
             collection = (
@@ -173,6 +164,19 @@ def user_collections():
                 return Response(status=201)
             else:
                 return Response(status=202)
+
+def get_user_collections(user):
+    return jsonify(
+        {
+            "collections": [
+                {
+                    "name": c.name,
+                    "recipes": [getRecipeMeta(r) for r in c.recipes],
+                }
+                for c in user.collections
+            ]
+        }
+    )
 
 
 @app.route("/api/collections/<collection_name>", methods=["GET", "POST", "DELETE"])
