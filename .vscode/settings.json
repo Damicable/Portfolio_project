@@ -1,9 +1,3 @@
 {
-<<<<<<< HEAD
-    "cSpell.words": [
-        "mydb"
-    ]
-=======
     "python.analysis.typeCheckingMode": "basic"
->>>>>>> fda2fd0c8f5d13a34d41bbd72ec0625f9a32ec4f
 }
