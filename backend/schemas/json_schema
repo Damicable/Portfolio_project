@@ -1,0 +1,109 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "Ingredient": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "english_name": { "type": "string" }
+            },
+            "required": ["id", "english_name"]
+        },
+        "User": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "name": { "type": "string" },
+                "username": { "type": "string" },
+                "password": { "type": "string" },
+                "bio": { "type": "string" }
+            },
+            "required": ["id", "name", "username", "password"]
+        },
+        "Recipe": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "name": { "type": "string" },
+                "header_image": { "type": "string", "contentEncoding": "base64" },
+                "prep_time": { "type": "integer" },
+                "description": { "type": "string" },
+                "difficulty": { "type": "integer" },
+                "vegetarian": { "type": "boolean" },
+                "quantity": { "type": "number" },
+                "unit": { "type": "string" },
+                "contributor_id": { "type": "integer" }
+            },
+            "required": ["id", "name", "header_image", "prep_time", "description", "difficulty", "vegetarian", "quantity", "unit", "contributor_id"]
+        },
+        "Recipe_Step": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "recipe_id": { "type": "integer" },
+                "serial_number": { "type": "integer" },
+                "instruction": { "type": "string" }
+            },
+            "required": ["id", "recipe_id", "serial_number", "instruction"]
+        },
+        "Recipe_Ingredient": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "recipe_id": { "type": "integer" },
+                "ingredient_id": { "type": "integer" },
+                "quantity": { "type": "number" },
+                "unit": { "type": "string" }
+            },
+            "required": ["id", "recipe_id", "ingredient_id", "quantity", "unit"]
+        },
+        "Tag": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "name": { "type": "string" }
+            },
+            "required": ["id", "name"]
+        },
+        "Recipe_Tag": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "tag_id": { "type": "integer" },
+                "recipe_id": { "type": "integer" }
+            },
+            "required": ["id", "tag_id", "recipe_id"]
+        },
+        "Collection": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "name": { "type": "string" },
+                "user_id": { "type": "integer" }
+            },
+            "required": ["id", "name", "user_id"]
+        },
+        "Collection_Recipe": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "collection_id": { "type": "integer" },
+                "recipe_id": { "type": "integer" }
+            },
+            "required": ["id", "collection_id", "recipe_id"]
+        },
+        "Comment": {
+            "type": "object",
+            "properties": {
+                "id": { "type": "integer" },
+                "text": { "type": "string" },
+                "commenter_id": { "type": "integer" },
+                "recipe_id": { "type": "integer" },
+                "is_reply": { "type": "boolean" },
+                "original_comment_id": { "type": ["integer", "null"] },
+                "date_time": { "type": "string", "format": "date-time" }
+            },
+            "required": ["id", "text", "commenter_id", "recipe_id", "is_reply", "date_time"]
+        }
+    }
+}
