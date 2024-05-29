@@ -92,6 +92,8 @@ def add_new_user(new_user: dict):
     db.session.commit()
     db.session.add(Collection(**{"name": "favorites", "user_id": user.id}))
     db.session.commit()
+    
+    return user.to_dict()
 
 
 def get_recipe_by_id(id: int) -> Recipe:

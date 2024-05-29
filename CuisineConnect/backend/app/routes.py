@@ -9,6 +9,7 @@ from flask_jwt_extended import (
     get_jwt_identity,
     unset_jwt_cookies,
     jwt_required,
+    set_access_cookies
 )
 
 from app import app, bcrypt, db
@@ -27,20 +28,20 @@ from app.controllers import (
 from app.models import User, Recipe, Ingredient, Tag, Collection, Collection_Recipe, Comment
 
 
-@app.route("/api/users", methods=["GET", "POST"])
+@app.route("/api/users", methods=["GET"])
 def users():
-    if request.method == "POST":
-        newUser = request.get_json(force=True)
-        user = User.query.filter(User.username == newUser["username"]).first()
-        print(newUser)
-        if user is None:
-            add_new_user(newUser)
-            return Response(status=201)
-        else:
-            return Response(status=201)
+    
+    return jsonify([user.to_dict() for user in User.query.all()])
 
+@app.route("/api/users/register", methods=["POST"])
+def users_register():
+    newUser = request.get_json(force=True)
+    user = User.query.filter(User.username == newUser["username"]).first()
+    if user is None:
+        new_user = add_new_user(newUser)
+        return jsonify(new_user), 201
     else:
-        return jsonify([user.to_dict() for user in User.query.all()])
+        return jsonify({"message": "Username is already taken"}), 400
 
 
 @app.route("/api/users/login", methods=["POST"])
@@ -50,9 +51,11 @@ def user_login():
     user = User.query.filter(User.username == username).first()
     if user is not None and bcrypt.check_password_hash(user.password, password):
         access_token = create_access_token(identity=username)
-        return jsonify({"access_token": access_token})
-    else:
-        abort(401)
+        response = jsonify(access_token=access_token)
+        set_access_cookies(response, access_token)
+        return response, 200
+    
+    return jsonify(message='Username or password is incorrect'), 401
 
 
 @app.route("/api/users/profile")
@@ -62,11 +65,12 @@ def user_profile():
     return jsonify(User.query.filter(User.username == username).first().to_dict())
 
 
-@app.route("/api/users/logout")
+@app.route("/api/users/logout", methods=['POST'])
+@jwt_required()
 def user_logout():
     response = Response(status=202)
     unset_jwt_cookies(response)
-    return response
+    return jsonify({"message": "Logout Successful"})
 
 
 @app.after_request
@@ -98,7 +102,7 @@ def users_str(username):
         return jsonify(user.to_dict())
 
 
-@app.route("/api/users/<username>/recipes")
+@app.route("/api/users/<username>/recipes", methods=['GET'])
 def user_str_recipes(username):
     user = User.query.filter(User.username == username).first()
     if user is None:
@@ -240,8 +244,6 @@ def recipes():
     newRecipeFull = request.get_json(force=True)
     username = get_jwt_identity()
     user = User.query.filter(User.username == username).first()
-    print(newRecipeFull)
-    print(username)
     if user is None:
         return Response(status=400)
     else:
