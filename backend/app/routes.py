@@ -9,6 +9,7 @@ from flask_jwt_extended import (
     get_jwt_identity,
     unset_jwt_cookies,
     jwt_required,
+    set_access_cookies
 )
 
 from app import app, bcrypt, db
@@ -27,21 +28,20 @@ from app.controllers import (
 from app.models import User, Recipe, Ingredient, Tag, Collection, Collection_Recipe, Comment
 
 
-@app.route("/api/users", methods=["GET", "POST"])
+@app.route("/api/users", methods=["GET"])
 def users():
-    if request.method == "POST":
-        newUser = request.get_json(force=True)
-        user = User.query.filter(User.username == newUser["username"]).first()
-        print(newUser)
-        if user is None:
-            add_new_user(newUser)
-            return Response(status=201)
-        else:
-            return Response(status=201)
+    
+    return jsonify([user.to_dict() for user in User.query.all()])
 
+@app.route("/api/users/register", methods=["POST"])
+def users_register():
+    newUser = request.get_json(force=True)
+    user = User.query.filter(User.username == newUser["username"]).first()
+    if user is None:
+        new_user = add_new_user(newUser)
+        return jsonify(new_user), 201
     else:
-        return jsonify([user.to_dict() for user in User.query.all()])
-
+        return jsonify(message="Username is already taken"), 400
 
 @app.route("/api/users/login", methods=["POST"])
 def user_login():
@@ -50,7 +50,10 @@ def user_login():
     user = User.query.filter(User.username == username).first()
     if user is not None and bcrypt.check_password_hash(user.password, password):
         access_token = create_access_token(identity=username)
-        return jsonify({"access_token": access_token})
+        response = jsonify(access_token=access_token,
+                           message='Login Successful')
+        set_access_cookies(response, access_token)
+        return response, 200
     else:
         abort(401)
 
@@ -63,6 +66,7 @@ def user_profile():
 
 
 @app.route("/api/users/logout")
+@jwt_required()
 def user_logout():
     response = Response(status=202)
     unset_jwt_cookies(response)
@@ -166,9 +170,9 @@ def user_collections():
                     Collection(**{"name": collection_name, "user_id": user.id})
                 )
                 db.session.commit()
-                return Response(status=201)
+                return jsonify(message="Collection has been created"), 201
             else:
-                return Response(status=202)
+                return jsonify(message="Collection already exist"), 400
         if request.method == "DELETE":
             collection_name = request.json.get("collection_name", None)
             collection = (
@@ -182,9 +186,9 @@ def user_collections():
                 ).delete()
                 db.session.delete(collection)
                 db.session.commit()
-                return Response(status=201)
+                return jsonify(message="Collection has been deleted"), 200
             else:
-                return Response(status=202)
+                return jsonify(message="Collection doesn't exist"), 400
 
 
 @app.route("/api/collections/<collection_name>", methods=["GET", "POST", "DELETE"])
@@ -245,8 +249,8 @@ def recipes():
     if user is None:
         return Response(status=400)
     else:
-        add_full_recipe(newRecipeFull, user.id)
-        return Response(status=201)
+        new_recipe = add_full_recipe(newRecipeFull, user.id)
+        return jsonify(message=f'New Recipe created {new_recipe.name}'), 201
 
 
 @app.route("/api/recipes/<int:num>", methods=["GET"])
