@@ -3,3 +3,4 @@ cuisine
 __pycache__
 db.py
 table.py
+.env
