@@ -4,8 +4,8 @@ import { createStructuredSelector } from "reselect";
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  Redirect,
+  Routes,
+  Navigate,
 } from "react-router-dom";
 
 import { Home } from "./pages/home";
@@ -29,7 +29,7 @@ function App({ currentUser }) {
       <TopBar />
       <NavBar />
       <Router>
-        <Switch>
+        <Routes>
           <Route exact path="/" component={Home} />
           <Route exact path="/about" component={About} />
           <Route exact path="/contact" component={Contact} />
@@ -38,10 +38,10 @@ function App({ currentUser }) {
           <Route
             exact
             path="/signin"
-            render={() => (currentUser ? <Redirect to="/" /> : <Login />)}
+            render={() => (currentUser ? <Navigate to="/" /> : <Login />)}
           />
           <Route exact component={NoMatch} />
-        </Switch>
+        </Routes>
       </Router>
       <Footer />
     </React.Fragment>
