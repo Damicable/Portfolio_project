@@ -2,13 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 import { Nav, Navbar, Container, Row, Col } from "react-bootstrap";
 import { createStructuredSelector } from "reselect";
+import { Link } from 'react-router-dom';
 
 import vars from "../vars";
 
 import { ReactComponent as LogoRed } from "../assets/LogoRed.svg";
 
-import { selectCurrentUser } from "../redux/user/user.selector";
-import { signOut } from "../redux/user/user.actions";
+// import { selectCurrentUser } from "../redux/user/user.selector";
+// import { signOut } from "../redux/user/user.actions";
 
 var TopBar = ({ currentUser, signOut }) => (
   <>
@@ -57,24 +58,26 @@ var NavBar = () => (
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="navbar-tog" />
 
-    <Navbar.Collapse id="navbar-tog">
+    {/* <Navbar.Collapse id="navbar-tog"> */}
       <Nav className="mx-lg-3">
         <Nav.Item>
-          <Nav.Link href="/about" style={itemStyle}>
-            About Us
+          <Nav.Link  href="/about" style={itemStyle} className="nav-link">
+            All Recipes
           </Nav.Link>
         </Nav.Item>
       </Nav>
       <Nav className="mx-lg-3">
         <Nav.Item>
-          <Nav.Link href="/contact" style={itemStyle}>
-            Contact
+          <Nav.Link  href="/contact" style={itemStyle} className="nav-link">
+            Create a Recipe
           </Nav.Link>
         </Nav.Item>
       </Nav>
-    </Navbar.Collapse>
+    {/* </Navbar.Collapse> */}
   </Navbar>
 );
+
+
 
 const navStyle = {
   background: `linear-gradient(to right, #dc2526 0%, #ef7c24 100%)`,
@@ -83,6 +86,7 @@ const navStyle = {
 const navStyle2 = {
   backgroundColor: "white",
   marginTop: "56px",
+  boxShadow: "0 4px 4px -4px gray",
 };
 const itemStyle = {
   textTransform: "uppercase",
@@ -92,15 +96,15 @@ const itemStyle = {
   color: vars.text,
 };
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-});
+// const mapStateToProps = createStructuredSelector({
+//   currentUser: selectCurrentUser,
+// });
 
-const mapDispatchToProps = (dispatch) => ({
-  signOut: () => dispatch(signOut()),
-});
+// const mapDispatchToProps = (dispatch) => ({
+//   signOut: () => dispatch(signOut()),
+// });
 
-TopBar = connect(mapStateToProps, mapDispatchToProps)(TopBar);
-NavBar = connect(mapStateToProps, mapDispatchToProps)(NavBar);
+// TopBar = connect(mapStateToProps, mapDispatchToProps)(TopBar);
+// NavBar = connect(mapStateToProps, mapDispatchToProps)(NavBar);
 
 export { TopBar, NavBar };

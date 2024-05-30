@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { selectCurrentUser } from "../redux/user/user.selector";
+// import { selectCurrentUser } from "../redux/user/user.selector";
 import { Nav, Navbar, Container, Row, Col, Button } from "react-bootstrap";
 import vars from "../vars";
 
@@ -106,7 +106,7 @@ const buttonStyle = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
+  // currentUser: selectCurrentUser,
 });
 
 export default connect(mapStateToProps, null)(Hero);

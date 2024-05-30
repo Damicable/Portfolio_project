@@ -18,12 +18,12 @@ const Styles = styled.div`
 export const Navigation = () => (
   <Styles>
     <Navbar expand="lg">
-      <Navbar.Brand href="/">FoodShare</Navbar.Brand>
+      <Navbar.Brand href="/">CuisineConnect</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Item>
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/" className="text-6xl">Home</Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Nav.Link href="/about">About</Nav.Link>
