@@ -48,8 +48,8 @@ export default function Header() {
               <div className="relative flex justify-between xl:grid xl:grid-cols-12 lg:gap-8">
                 <div className="flex md:absolute md:left-0 md:inset-y-0 lg:static xl:col-span-2">
                   <div className="flex-shrink-0 flex items-center">
-                    <Link to="/" className="font-normal text-xl  text-teal-700">
-                      Mesob Recipe
+                    <Link to="/" className="font-normal text-xl text-[#D42B2B]">
+                      <img src={require('../../assets/logo.png')} alt="Logo" className="h-20 w-20" />
                     </Link>
                   </div>
                 </div>
@@ -61,15 +61,12 @@ export default function Header() {
                       </label>
                       <div className="relative">
                         <div className="pointer-events-none absolute inset-y-0 left-0 pl-3 flex items-center">
-                          <SearchIcon
-                            className="h-5 w-5 text-gray-400"
-                            aria-hidden="true"
-                          />
+                          <SearchIcon className="h-5 w-5 text-[#D42B2B]" aria-hidden="true" />
                         </div>
                         <input
                           id="search"
                           name="search"
-                          className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                          className="block w-full bg-white border border-gray-300 rounded-md py-2 pl-10 pr-3 text-sm placeholder-[#D42B2B] focus:outline-none focus:text-gray-900 focus:placeholder-gray-400 focus:ring-1 focus:ring-[#D42B2B] focus:border-[#D42B2B] sm:text-sm"
                           placeholder="Search"
                           type="search"
                         />
@@ -79,7 +76,7 @@ export default function Header() {
                 </div>
                 <div className="flex items-center md:absolute md:right-0 md:inset-y-0 lg:hidden">
                   {/* Mobile menu button */}
-                  <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500">
+                  <Popover.Button className="-mx-2 rounded-md p-2 inline-flex items-center justify-center text-[#D42B2B] hover:bg-gray-100 hover:text-[#D42B2B] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#D42B2B]">
                     <span className="sr-only">Open menu</span>
                     {open ? (
                       <XIcon className="block h-6 w-6" aria-hidden="true" />
@@ -89,19 +86,11 @@ export default function Header() {
                   </Popover.Button>
                 </div>
                 <div className="hidden lg:flex lg:items-center lg:justify-end xl:col-span-4">
-                  {/* <a
-                    href="/"
-                    className="ml-5 flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </a> */}
-
                   {/* Profile dropdown */}
                   {token && (
                     <Menu as="div" className="flex-shrink-0 relative ml-5">
                       <div>
-                        <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        <Menu.Button className="bg-white rounded-full flex focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D42B2B]">
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
@@ -131,7 +120,7 @@ export default function Header() {
                                   to={item.to}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
-                                    "block py-2 px-4 text-sm text-gray-700"
+                                    "block py-2 px-4 text-sm text-[#D42B2B]"
                                   )}
                                 >
                                   {item.name}
@@ -141,10 +130,9 @@ export default function Header() {
                           ))}
                           <Menu.Item>
                             <button
-                              className="block py-2 px-4 text-sm text-gray-700"
+                              className="block py-2 px-4 text-sm text-[#D42B2B]"
                               onClick={() => setModal(true)}
                             >
-                              {" "}
                               Logout
                             </button>
                           </Menu.Item>
@@ -155,16 +143,16 @@ export default function Header() {
                   {!token && (
                     <Link
                       to="/login"
-                      className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-400 hover:bg-teal-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-200"
+                      className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#D42B2B] hover:bg-[#D42B2B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D42B2B]"
                     >
                       Sign in
                     </Link>
                   )}
-
+  
                   {!token && (
                     <Link
                       to="/register"
-                      className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                      className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#D42B2B] hover:bg-[#D42B2B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D42B2B]"
                     >
                       Sign Up
                     </Link>
@@ -172,7 +160,7 @@ export default function Header() {
                   {token && (
                     <Link
                       to="/recipe/create"
-                      className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                      className="ml-6 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-[#D42B2B] hover:bg-[#D42B2B] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D42B2B]"
                     >
                       Create Recipe
                     </Link>
@@ -180,22 +168,22 @@ export default function Header() {
                 </div>
               </div>
             </div>
-
+  
             <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
               <div className="max-w-3xl mx-auto px-2 pt-2 pb-3 space-y-1 sm:px-4">
                 {!token && (
                   <Link
                     to="/login"
-                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-600 hover:bg-teal-700"
+                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#D42B2B] hover:bg-[#D42B2B]"
                   >
                     Sign in
                   </Link>
                 )}
-
+  
                 {!token && (
                   <Link
                     to="/register"
-                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-600 hover:bg-teal-700"
+                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#D42B2B] hover:bg-[#D42B2B]"
                   >
                     Sign Up
                   </Link>
@@ -203,24 +191,11 @@ export default function Header() {
                 {token && (
                   <Link
                     to="/recipe/create"
-                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-teal-600 hover:bg-teal-700"
+                    className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-[#D42B2B] hover:bg-[#D42B2B]"
                   >
                     Create Recipe
                   </Link>
                 )}
-                {/* {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? 'page' : undefined}
-                    className={classNames(
-                      item.current ? 'bg-gray-100 text-gray-900' : 'hover:bg-gray-50',
-                      'block rounded-md py-2 px-3 text-base font-medium'
-                    )}
-                  >
-                    {item.name}
-                  </a>
-                ))} */}
               </div>
               {token && (
                 <div className="border-t border-gray-200 pt-4 pb-3">
@@ -237,36 +212,28 @@ export default function Header() {
                       />
                     </div>
                     <div className="ml-3">
-                      <div className="text-base font-medium text-gray-800">
+                      <div className="text-base font-medium text-[#D42B2B]">
                         {user && user.username}
                       </div>
-                      <div className="text-sm font-medium text-gray-500">
+                      <div className="text-sm font-medium text-[#D42B2B]">
                         {user && user.email}
                       </div>
                     </div>
-                    {/* <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 bg-white rounded-full p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button> */}
                   </div>
                   <div className="mt-3 max-w-3xl mx-auto px-2 space-y-1 sm:px-4">
                     {userNavigation.map((item) => (
                       <Link
                         key={item.name}
                         to={item.to}
-                        className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                        className="block rounded-md py-2 px-3 text-base font-medium text-[#D42B2B] hover:bg-gray-50 hover:text-[#D42B2B]"
                       >
                         {item.name}
                       </Link>
                     ))}
                     <button
-                      className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                      className="block rounded-md py-2 px-3 text-base font-medium text-[#D42B2B] hover:bg-gray-50 hover:text-[#D42B2B]"
                       onClick={() => setModal(true)}
                     >
-                      {" "}
                       Logout
                     </button>
                   </div>
@@ -279,4 +246,5 @@ export default function Header() {
       {modal && <Logout modal={modal} setModal={setModal} />}
     </>
   );
+  
 }

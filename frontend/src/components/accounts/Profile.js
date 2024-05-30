@@ -39,7 +39,7 @@ export default function Profile() {
             Update Profile
           </h2>
           <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <div className="mt-4  md:mt-0">
+            <div className="mt-4 md:mt-0">
               <div className="flex items-center">
                 <label htmlFor="picture" className="relative cursor-pointer">
                   <img
@@ -64,14 +64,14 @@ export default function Profile() {
                 <div>
                   <button
                     type="button"
-                    className="ml-2 bg-white py-2 px-2 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                    className="ml-2 bg-white py-2 px-2 border border-gray-300 rounded-md text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D42B2B]"
                     onClick={handleAvatarChange}
                   >
                     Change
                   </button>
                 </div>
               </div>
-
+  
               <div className="mt-3">
                 <label htmlFor="username" className="sr-only">
                   Username
@@ -82,7 +82,7 @@ export default function Profile() {
                   type="text"
                   autoComplete="username"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
                   placeholder="Username"
                   defaultValue={user.username}
                   onChange={(e) => setUsername(e.target.value)}
@@ -98,7 +98,7 @@ export default function Profile() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
                   placeholder="Email address"
                   defaultValue={user.email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -119,7 +119,7 @@ export default function Profile() {
           </button>
         </div>
       </div>
-
+  
       <div className="mt-8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-lg leading-6 font-medium text-gray-900">
@@ -137,7 +137,7 @@ export default function Profile() {
                   type="password"
                   autoComplete="old-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
                   placeholder="Old Password"
                   onChange={(e) => setOpassword(e.target.value)}
                 />
@@ -152,7 +152,7 @@ export default function Profile() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
                   placeholder="New Password"
                   onChange={(e) => setNpassword(e.target.value)}
                 />
@@ -173,5 +173,5 @@ export default function Profile() {
         </div>
       </div>
     </>
-  );
+  );  
 }

@@ -9,7 +9,7 @@ export default function Landing() {
           <div>
             <Link
               to="/recipe"
-              className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-white uppercase rounded-full bg-teal-600"
+              className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-white uppercase rounded-full bg-[#D42B2B]"
             >
               Explore
             </Link>
@@ -49,9 +49,9 @@ export default function Landing() {
         </div>
         <div className="grid gap-8 row-gap-10 lg:grid-cols-2">
           <div className="max-w-md sm:mx-auto sm:text-center">
-            <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-teal-50 sm:mx-auto sm:w-24 sm:h-24">
+            <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-[#FDE8E8] sm:mx-auto sm:w-24 sm:h-24">
               <svg
-                className="w-12 h-12 text-teal-800 sm:w-16 sm:h-16"
+                className="w-12 h-12 text-[#D42B2B] sm:w-16 sm:h-16"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -68,15 +68,15 @@ export default function Landing() {
               Create a recipe
             </h6>
             <p className="mb-3 text-sm text-gray-900">
-              Mix together 1 large smile, 2 cups of sweetness and positivity , A
-              good sense of humour, 1 cup of self esteem AND a heart full of
+              Mix together 1 large smile, 2 cups of sweetness and positivity, a
+              good sense of humour, 1 cup of self-esteem AND a heart full of
               love and share it to the world.
             </p>
           </div>
           <div className="max-w-md sm:mx-auto sm:text-center">
-            <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-teal-50 sm:mx-auto sm:w-24 sm:h-24">
+            <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-[#FDE8E8] sm:mx-auto sm:w-24 sm:h-24">
               <svg
-                className="w-12 h-12 text-teal-800 sm:w-16 sm:h-16"
+                className="w-12 h-12 text-[#D42B2B] sm:w-16 sm:h-16"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -100,9 +100,9 @@ export default function Landing() {
             </p>
           </div>
           <div className="max-w-md sm:mx-auto sm:text-center">
-            <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-teal-50 sm:mx-auto sm:w-24 sm:h-24">
+            <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-[#FDE8E8] sm:mx-auto sm:w-24 sm:h-24">
               <svg
-                className="w-12 h-12 text-teal-800 sm:w-16 sm:h-16"
+                className="w-12 h-12 text-[#D42B2B] sm:w-16 sm:h-16"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
@@ -123,9 +123,9 @@ export default function Landing() {
             </p>
           </div>
           <div className="max-w-md sm:mx-auto sm:text-center">
-            <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-teal-50 sm:mx-auto sm:w-24 sm:h-24">
+            <div className="flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-[#FDE8E8] sm:mx-auto sm:w-24 sm:h-24">
               <svg
-                className="w-12 h-12 text-teal-800 sm:w-16 sm:h-16"
+                className="w-12 h-12 text-[#D42B2B] sm:w-16 sm:h-16"
                 stroke="currentColor"
                 viewBox="0 0 52 52"
               >
