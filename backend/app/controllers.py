@@ -11,6 +11,7 @@ def add_full_recipe(new_recipe_full: dict, contributor_id: int, recipe_id=None):
     if recipe_id is None:
         new_recipe = Recipe(
             name=new_recipe_full["name"],
+            header_image=new_recipe_full["header_image"],
             prep_time=new_recipe_full["prep_time"],
             description=new_recipe_full["description"],
             difficulty=new_recipe_full["difficulty"],
@@ -73,6 +74,8 @@ def add_full_recipe(new_recipe_full: dict, contributor_id: int, recipe_id=None):
         )
         db.session.add(recipe_ingredient)
     db.session.commit()
+    
+    return new_recipe
 
 
 # This method just deletes the old one and creates a new one in its place

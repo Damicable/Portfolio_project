@@ -53,7 +53,7 @@ Recipe_Tag = db.Table(
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), nullable=False, unique=True)
-    header_image = db.Column(db.String(128), nullable = True)
+    header_image = db.Column(db.String(128), nullable=True)
     prep_time = db.Column(db.Integer, nullable=False)
     description = db.Column(db.Text, nullable=False)
     difficulty = db.Column(db.Integer, nullable=False)

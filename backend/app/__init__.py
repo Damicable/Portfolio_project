@@ -28,7 +28,11 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt_manager = JWTManager(app)
 
+app.url_map.strict_slashes = False
+
 with app.app_context():
     from app.models import *
     from app.routes import *
     from app.controllers import *
+    
+    db.create_all()
