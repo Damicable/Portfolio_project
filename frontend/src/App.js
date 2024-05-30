@@ -1,55 +1,74 @@
-import React from "react";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { React } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/layouts/Header";
+import Register from "./components/accounts/Register";
+import Login from "./components/accounts/Login";
+import Landing from "./components/layouts/Landing";
+import Recipes from "./components/recipe/Recipes";
+import RecipeDetail from "./components/recipe/RecipeDetail";
+import RecipeCreate from "./components/recipe/RecipeCreate";
+import RecipeEdit from "./components/recipe/RecipeEdit";
+import WithPrivateRoute from "./utils/WithPrivateRoute";
+import Dashboard from "./components/layouts/Dashboard";
 
-import { Home } from "./pages/home";
-import { About } from "./pages/about";
-import { Contact } from "./pages/contact";
-import { NoMatch } from "./pages/noMatch";
-import Login from "./pages/login";
-import Find from "./pages/find";
-import Share from "./pages/share";
+import Profile from "./components/accounts/Profile";
+import MyRecipes from "./components/recipe/MyRecipes";
+import SavedRecipes from "./components/recipe/SavedRecipes";
 
-import Footer from "./components/footer";
-import { TopBar, NavBar } from "./components/topbar";
+import ErrorDiv from "./components/layouts/ErrorDiv";
 
-import { selectCurrentUser } from "./redux/user/user.selector";
-
-import "./App.css";
-
-function App({ currentUser }) {
+export default function App() {
   return (
-    <React.Fragment>
-      <TopBar />
-      <NavBar />
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/find" component={Find} />
-          <Route exact path="/share" component={Share} />
-          <Route
-            exact
-            path="/signin"
-            render={() => (currentUser ? <Redirect to="/" /> : <Login />)}
-          />
-          <Route exact component={NoMatch} />
-        </Switch>
-      </Router>
-      <Footer />
-    </React.Fragment>
+    <Router>
+      <Header />
+      <ErrorDiv />
+      <Routes>
+        <Route exact path="/" element={<Landing />} />
+        <Route exact path="/register" element={<Register />} />
+        <Route exact path="/login" element={<Login />} />
+
+        <Route exact path="/recipe" element={<Recipes />} />
+        <Route
+          exact
+          path="/recipe/:id"
+          element={
+            <WithPrivateRoute>
+              <RecipeDetail />
+            </WithPrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/recipe/create"
+          element={
+            <WithPrivateRoute>
+              <RecipeCreate />
+            </WithPrivateRoute>
+          }
+        />
+        <Route
+          exact
+          path="/recipe/:id/edit"
+          element={
+            <WithPrivateRoute>
+              <RecipeEdit />
+            </WithPrivateRoute>
+          }
+        />
+
+        <Route
+          path="dashboard"
+          element={
+            <WithPrivateRoute>
+              <Dashboard />
+            </WithPrivateRoute>
+          }
+        >
+          <Route path="profile" element={<Profile />} />
+          <Route path="myRecipes" element={<MyRecipes />} />
+          <Route path="savedRecipes" element={<SavedRecipes />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 }
-
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-});
-
-export default connect(mapStateToProps, null)(App);
