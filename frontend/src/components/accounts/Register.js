@@ -70,7 +70,7 @@ export default function Register() {
                   type="text"
                   autoComplete="username"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
                   placeholder="Username"
                   onChange={(e) => setUsername(e.target.value)}
                 />
@@ -85,7 +85,7 @@ export default function Register() {
                   type="email"
                   autoComplete="email"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
                   placeholder="Email address"
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -100,7 +100,7 @@ export default function Register() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -115,21 +115,21 @@ export default function Register() {
                   type="password"
                   autoComplete="current-password"
                   required
-                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
-                  placeholder="confirm Password"
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
+                  placeholder="Confirm Password"
                   onChange={(e) => setConfirmPassword(e.target.value)}
                 />
               </div>
             </div>
-
+  
             <div>
               <button
                 type="submit"
-                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
+                className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#D42B2B] hover:bg-[#B92424] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#D42B2B]"
               >
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
                   <LockClosedIcon
-                    className="h-5 w-5 text-teal-500 group-hover:text-teal-400"
+                    className="h-5 w-5 text-[#B92424] group-hover:text-[#D42B2B]"
                     aria-hidden="true"
                   />
                 </span>
@@ -139,7 +139,7 @@ export default function Register() {
             <div className="text-sm">
               <Link
                 to="/login"
-                className="font-medium text-teal-600 hover:text-teal-500"
+                className="font-medium text-[#D42B2B] hover:text-[#B92424]"
               >
                 Already have an account? Login
               </Link>
@@ -148,5 +148,5 @@ export default function Register() {
         </div>
       </div>
     </>
-  );
+  );  
 }
