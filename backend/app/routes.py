@@ -2,8 +2,8 @@ from datetime import datetime, timedelta, timezone
 import json
 
 from flask import jsonify, request, abort, Response
-from flask_bcrypt import Bcrypt
-from flask_jwt_extended import (
+from flask_bcrypt import Bcrypt # type: ignore
+from flask_jwt_extended import ( # type: ignore
     create_access_token,
     get_jwt,
     get_jwt_identity,
@@ -45,8 +45,9 @@ def users_register():
 
 @app.route("/api/users/login", methods=["POST"])
 def user_login():
-    username = request.json.get("username", None)
-    password = request.json.get("password", None).encode("utf-8")
+    if request.json :
+        username = request.json.get("username", None)
+        password = request.json.get("password", None).encode("utf-8")
     user = User.query.filter(User.username == username).first()
     if user is not None and bcrypt.check_password_hash(user.password, password):
         access_token = create_access_token(identity=username)
@@ -159,7 +160,8 @@ def user_collections():
                 }
             )
         if request.method == "POST":
-            collection_name = request.json.get("collection_name", None)
+            if request.json:
+                collection_name = request.json.get("collection_name", None)
             collection = (
                 Collection.query.filter(Collection.user_id == user.id)
                 .filter(Collection.name == collection_name)
@@ -174,7 +176,8 @@ def user_collections():
             else:
                 return jsonify(message="Collection already exist"), 400
         if request.method == "DELETE":
-            collection_name = request.json.get("collection_name", None)
+            if request.json:
+                collection_name = request.json.get("collection_name", None)
             collection = (
                 Collection.query.filter(Collection.user_id == user.id)
                 .filter(Collection.name == collection_name)
@@ -208,7 +211,8 @@ def user_collection(collection_name):
             {"recipes": [get_recipe_meta(recipe) for recipe in collection.recipes]}
         )
     if request.method == "POST":
-        recipe_id = request.json.get("recipe_id", None)
+        if request.json:
+            recipe_id = request.json.get("recipe_id", None)
         recipe = Recipe.query.get(recipe_id)
         if recipe is None:
             abort(404)
@@ -223,7 +227,8 @@ def user_collection(collection_name):
                 )
                 return Response(status=201)
     if request.method == "DELETE":
-        recipe_id = request.json.get("recipe_id", None)
+        if request.json:
+            recipe_id = request.json.get("recipe_id", None)
         recipe = Recipe.query.get(recipe_id)
         if recipe is None:
             abort(404)
