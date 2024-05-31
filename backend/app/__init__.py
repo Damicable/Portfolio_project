@@ -1,9 +1,9 @@
 from flask import Flask
 from config import Config
-from flask_sqlalchemy import SQLAlchemy
-from flask_bcrypt import Bcrypt
-from flask_cors import CORS
-from flask_jwt_extended import JWTManager
+from flask_sqlalchemy import SQLAlchemy # type: ignore
+from flask_bcrypt import Bcrypt # type: ignore
+from flask_cors import CORS # type: ignore
+from flask_jwt_extended import JWTManager # type: ignore
 from dotenv import load_dotenv
 import os
 
@@ -35,4 +35,4 @@ with app.app_context():
     from app.routes import *
     from app.controllers import *
     
-    db.create_all()
+    db.create_all() # type: ignore
