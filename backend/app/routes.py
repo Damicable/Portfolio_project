@@ -36,29 +36,37 @@ def users():
 @app.route("/api/users/register", methods=["POST"])
 def users_register():
     newUser = request.get_json(force=True)
-    user = User.query.filter(User.username == newUser["username"]).first()
-    if user is None:
-        new_user = add_new_user(newUser)
-        return jsonify(new_user), 201
-    else:
+
+    if User.query.filter(User.username == newUser["username"]).first():
         return jsonify(message="Username is already taken"), 400
+    
+    if User.query.filter(User.email == newUser["email"]).first():
+        return jsonify(message="Email is already taken"), 400
+    
+    new_user = add_new_user(newUser)
+    return jsonify(new_user), 201
+        
 
 @app.route("/api/users/login", methods=["POST"])
 def user_login():
-    username = request.json.get("username", None)
+    email = request.json.get("email", None)
     password = request.json.get("password", None).encode("utf-8")
-    user = User.query.filter(User.username == username).first()
+
+    if not email or not password:
+        return jsonify({"msg": "Missing email or password"}), 400
+
+    user = User.query.filter(User.email == email).first()
     if user is not None and bcrypt.check_password_hash(user.password, password):
-        access_token = create_access_token(identity=username)
+        access_token = create_access_token(identity=user.username)
         response = jsonify(access_token=access_token,
                            message='Login Successful')
         set_access_cookies(response, access_token)
         return response, 200
     else:
-        abort(401)
+        return jsonify({"msg": "Email or password is incorrect"}), 401
 
 
-@app.route("/api/users/profile")
+@app.route("/api/user")
 @jwt_required()
 def user_profile():
     username = get_jwt_identity()
@@ -151,6 +159,7 @@ def user_collections():
                 {
                     "collections": [
                         {
+                            "id": c.id,
                             "name": c.name,
                             "recipes": [get_recipe_meta(r) for r in c.recipes],
                         }
@@ -191,14 +200,14 @@ def user_collections():
                 return jsonify(message="Collection doesn't exist"), 400
 
 
-@app.route("/api/collections/<collection_name>", methods=["GET", "POST", "DELETE"])
+@app.route("/api/collections/<int:id>", methods=["GET", "POST", "DELETE"])
 @jwt_required()
-def user_collection(collection_name):
+def user_collection(id):
     username = get_jwt_identity()
     user = User.query.filter(User.username == username).first()
     collection = (
         Collection.query.filter(Collection.user_id == user.id)
-        .filter(Collection.name == collection_name)
+        .filter(Collection.id == id)
         .first()
     )
     if user is None or collection is None:
@@ -214,14 +223,11 @@ def user_collection(collection_name):
             abort(404)
         else:
             if recipe.id in [r.id for r in collection.recipes]:
-                return Response(status=202)
+                return jsonify(msg='Recipe already in collection'), 200
             else:
-                db.engine.execute(
-                    Collection_Recipe.insert().values(
-                        **{"collection_id": collection.id, "recipe_id": recipe.id}
-                    )
-                )
-                return Response(status=201)
+                collection.recipes.append(recipe)
+                db.session.commit()
+                return jsonify(msg='Recipe added to collection'), 201
     if request.method == "DELETE":
         recipe_id = request.json.get("recipe_id", None)
         recipe = Recipe.query.get(recipe_id)
@@ -229,16 +235,16 @@ def user_collection(collection_name):
             abort(404)
         else:
             if recipe.id not in [r.id for r in collection.recipes]:
-                return Response(status=202)
+                return jsonify(msg='Recipe is not in collection'), 404
             else:
                 db.session.query(Collection_Recipe).filter_by(
                     collection_id=collection.id
                 ).filter_by(recipe_id=recipe_id).delete()
                 db.session.commit()
-                return Response(status=201)
+                return jsonify(msg='Recipe has been removed from collection'), 204
 
 
-@app.route("/api/recipes", methods=["POST"])
+@app.route("/api/recipes/create", methods=["POST"])
 @jwt_required()
 def recipes():
     newRecipeFull = request.get_json(force=True)
@@ -250,7 +256,7 @@ def recipes():
         return Response(status=400)
     else:
         new_recipe = add_full_recipe(newRecipeFull, user.id)
-        return jsonify(message=f'New Recipe created {new_recipe.name}'), 201
+        return jsonify(message=f'New Recipe created {new_recipe.name}, id {new_recipe.id}'), 201
 
 
 @app.route("/api/recipes/<int:num>", methods=["GET"])
