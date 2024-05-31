@@ -11,6 +11,8 @@ export default function Logout({ modal, setModal }) {
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
+  console.log(token)
+
   useEffect(() => {
     if (!token) {
       setModal(false);
@@ -20,7 +22,7 @@ export default function Logout({ modal, setModal }) {
   const handleLogoutClick = () => {
     dispatch(
       logout({
-        refresh: JSON.parse(localStorage.getItem("recipe")).refresh,
+        refresh: JSON.parse(localStorage.getItem("access_token")).refresh,
       })
     );
   };

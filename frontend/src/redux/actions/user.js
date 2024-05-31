@@ -17,8 +17,9 @@ export const loadUser = () => (dispatch, getState) => {
   dispatch({ type: USER_LOADING });
 
   axiosInstance
-    .get("/user/", tokenConfig(getState))
+    .get("/user", tokenConfig(getState))
     .then((res) => {
+      console.log(res.data)
       dispatch({
         type: USER_LOADED,
         payload: res.data,
@@ -98,8 +99,9 @@ export const getUserRecipes = (username) => (dispatch, getState) => {
   dispatch({ type: RECIPE_LOADING });
 
   axiosInstance
-    .get(`/recipe/?author__username=${username}`, tokenConfig(getState))
+    .get(`/users/${username}/recipes`, tokenConfig(getState))
     .then((res) => {
+      console.log(res.data)
       dispatch({
         type: GET_USER_RECIPES,
         payload: res.data,

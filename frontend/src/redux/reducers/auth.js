@@ -8,7 +8,7 @@ import {
 } from "../actions/types";
 
 const initialState = {
-  token: JSON.parse(localStorage.getItem("recipe")),
+  token: null,
   isAuthenticated: null,
   isLoading: false,
   user: null,
@@ -18,18 +18,18 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case LOGIN_SUCCESS:
     case REGISTER_SUCCESS:
-      localStorage.setItem("recipe", JSON.stringify(action.payload.tokens));
+      localStorage.setItem("access_token", JSON.stringify(action.payload.access_token));
       return {
         ...state,
         ...action.payload,
         isAuthenticated: true,
         isLoading: false,
-        token: action.payload.tokens,
+        token: action.payload.access_token,
       };
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
     case REGISTER_FAIL:
-      localStorage.removeItem("recipe");
+      localStorage.removeItem("access_token");
       return {
         ...state,
         token: null,

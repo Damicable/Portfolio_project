@@ -7,7 +7,7 @@ import RecipeCard from "./RecipeCard";
 export default function Recipes() {
   const dispatch = useDispatch();
   const { recipes, is_loading } = useSelector((state) => state.recipes);
-
+  console.log(recipes)
   useEffect(() => {
     dispatch(getRecipes());
   }, []);
