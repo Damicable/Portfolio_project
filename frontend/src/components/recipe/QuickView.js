@@ -14,11 +14,11 @@ import { likeRecipe, saveRecipe } from "../../redux/actions/recipes";
 
 export default function QuickView({ open, setOpen, id }) {
   const { recipes, is_loading } = useSelector((state) => state.recipes);
-
+  console.log("quick",recipes)
   const dispatch = useDispatch();
 
   const recipe = recipes.filter((recipe) => recipe.id === id);
-
+  console.log("quick",recipe)
   const [like, setLike] = useState(recipe[0].total_number_of_likes);
   const [bookmark, setBookmark] = useState(recipe[0].total_number_of_bookmarks);
 
@@ -95,14 +95,14 @@ export default function QuickView({ open, setOpen, id }) {
                           Recipe information
                         </h3>
                         <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-teal-600 ">
-                          {recipe[0].category.name}
+                          {}
                         </span>
 
                         <div className="mt-6">
                           <h4 className="sr-only">Description</h4>
 
                           <p className="text-sm text-gray-700">
-                            {recipe[0].desc}
+                            {recipe[0].description}
                           </p>
                         </div>
                       </section>
@@ -152,17 +152,17 @@ export default function QuickView({ open, setOpen, id }) {
                           <div className="inline-flex items-center text-teal-600 border py-1 px-2 mt-3 border-transparent bg-teal-50 rounded-md">
                             <ClockIcon className="h-8 w-8 text-teal-600 pr-1" />{" "}
                             <span className="font-medium">
-                              {recipe[0].cook_time}
+                              {recipe[0].prep_time}
                             </span>
                           </div>
                           <p className="mt-8 text-sm font-weight text-gray-500 truncate">
-                            by {recipe[0].username}
+                            by {recipe[0].contributor_username}
                           </p>
                         </div>
 
                         <div className="mt-6">
                           <Link
-                            to={`/recipe/${id}`}
+                            to={`/recipes/${id}/full`}
                             className="font-medium text-teal-600 hover:text-teal-500"
                           >
                             <button

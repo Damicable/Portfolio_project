@@ -23,10 +23,10 @@ export const getRecipes = () => (dispatch) => {
   axiosInstance
     .get("/recipes/all", null, config)
     .then((res) => {
-      console.log(res.data)
+      console.log("action",res.data)
       dispatch({
         type: GET_RECIPES,
-        payload: res.data,
+        payload: res.data.recipes,
       });
     })
     .catch((err) => {

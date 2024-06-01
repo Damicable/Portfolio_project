@@ -59,7 +59,7 @@ def user_login():
     if user is not None and bcrypt.check_password_hash(user.password, password):
         access_token = create_access_token(identity=user.username)
         response = jsonify(access_token=access_token,
-                           message='Login Successful')
+                           msg='Login Successful')
         set_access_cookies(response, access_token)
         return response, 200
     else:
@@ -314,13 +314,13 @@ def recipes_n_steps(num):
         return jsonify({"name": r.name, "recipe_steps": get_recipe_steps(r)})
 
 
-@app.route("/api/recipes/<int:num>/full")
+@app.route("/api/recipes/<int:num>/full", methods=['GET'])
 def recipes_n_full(num):
     r = get_recipe_by_id(num)
     if r is None:
         abort(404)
     else:
-        return jsonify(get_recipe_full(r))
+        return jsonify(get_recipe_full(r)), 200
 
 
 @app.route("/api/recipes/count")
