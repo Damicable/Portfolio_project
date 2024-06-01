@@ -46,7 +46,7 @@ export default function RecipeDetail() {
         </p>
       </div>
     );
-
+  console.log("recipeDetail", detailRecipe)
   const procedures = JSON.parse(detailRecipe.procedure);
   const ingredients = JSON.parse(detailRecipe.ingredients);
 
@@ -88,7 +88,7 @@ export default function RecipeDetail() {
                     {detailRecipe.title}
                   </h1>
 
-                  <Link to={`/recipe/${id}/edit/`}>
+                  <Link to={`/recipes/${id}/edit/`}>
                     <button
                       type="button"
                       className="group ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
@@ -120,7 +120,7 @@ export default function RecipeDetail() {
                 <div className="mt-3">
                   <h2 className="sr-only">Recipe information</h2>
                   <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-gray-100 text-teal-600 ">
-                    {detailRecipe.category.name}
+                    {}
                   </span>
                 </div>
 
@@ -128,7 +128,7 @@ export default function RecipeDetail() {
                   <h3 className="sr-only">Description</h3>
                   <div
                     className="text-base text-gray-700 space-y-6"
-                    dangerouslySetInnerHTML={{ __html: detailRecipe.desc }}
+                    dangerouslySetInnerHTML={{ __html: detailRecipe.descriptionn }}
                   />
                 </div>
 
@@ -167,7 +167,7 @@ export default function RecipeDetail() {
 
                 <div className="inline-flex items-center text-teal-600 border py-1 px-2 mt-3 border-transparent bg-teal-50 rounded-md">
                   <ClockIcon className="h-8 w-8 text-teal-600 pr-1" />{" "}
-                  <span className="font-medium">{detailRecipe.cook_time}</span>
+                  <span className="font-medium">{detailRecipe.prep_time}</span>
                 </div>
 
                 <section aria-labelledby="details-heading" className="mt-12">

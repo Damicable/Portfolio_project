@@ -6,6 +6,7 @@ import { register } from "../../redux/actions/auth";
 
 export default function Register() {
   const navigate = useNavigate();
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -25,6 +26,7 @@ export default function Register() {
     e.preventDefault();
     dispatch(
       register({
+        name: name,
         username: username,
         email: email,
         password: password,
@@ -43,6 +45,21 @@ export default function Register() {
           <form className="mt-8 space-y-6" onSubmit={handleFormSubmit}>
             <input type="hidden" name="remember" defaultValue="true" />
             <div className="rounded-md shadow-sm -space-y-px">
+              <div>
+                <label htmlFor="name" className="sr-only">
+                  Name
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  required
+                  className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-teal-500 focus:border-teal-500 focus:z-10 sm:text-sm"
+                  placeholder="Full Name"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
               <div>
                 <label htmlFor="username" className="sr-only">
                   Username

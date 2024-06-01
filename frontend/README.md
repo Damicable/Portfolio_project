@@ -7,7 +7,7 @@
 - React.js
 - Redux
 - TailwindCSS
-- Backend using Django, DRF https://github.com/earthcomfy/recipe-api
+- Backend using Flask
 
 ## Basic Features
 

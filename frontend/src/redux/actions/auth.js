@@ -10,7 +10,7 @@ import {
 import axiosInstance from "../../utils/axios";
 
 export const register =
-  ({ username, email, password, confirmPassword }) =>
+  ({name, username, email, password, confirmPassword }) =>
   (dispatch) => {
     const config = {
       headers: {
@@ -20,13 +20,14 @@ export const register =
 
     if (password === confirmPassword) {
       const body = JSON.stringify({
+        name,
         username,
         email,
         password,
       });
 
       axiosInstance
-        .post("/user/register/", body, config)
+        .post("/users/register/", body, config)
         .then((res) => {
           dispatch({
             type: REGISTER_SUCCESS,
@@ -69,7 +70,7 @@ export const login =
     const body = JSON.stringify({ email, password });
 
     axiosInstance
-      .post("/user/login/", body, config)
+      .post("/users/login/", body, config)
       .then((res) => {
         dispatch({
           type: LOGIN_SUCCESS,
@@ -97,7 +98,7 @@ export const logout =
     const body = JSON.stringify({ refresh });
 
     axiosInstance
-      .post("/user/logout/", body, tokenConfig(getState))
+      .post("/users/logout/", body, tokenConfig(getState))
       .then((res) => {
         dispatch({
           type: LOGOUT_SUCCESS,

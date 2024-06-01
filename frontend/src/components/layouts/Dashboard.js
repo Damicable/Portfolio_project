@@ -33,7 +33,7 @@ export default function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { user, avatar } = useSelector((state) => state.user);
-
+  console.log("dashboard",user)
   return (
     <>
       <div className="min-h-full">

@@ -5,3 +5,4 @@ db.py
 table.py
 .env
 create_db.py
+migrations
