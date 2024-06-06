@@ -7,6 +7,7 @@ import {
 } from "./types";
 
 export const addIngredients = (ingredients) => {
+  console.log("forms", ingredients)
   return {
     type: ADD_INGREDIENTS,
     payload: ingredients,
@@ -14,6 +15,7 @@ export const addIngredients = (ingredients) => {
 };
 
 export const addProcedures = (procedures) => {
+  console.log("forms", procedures)
   return {
     type: ADD_PROCEDURES,
     payload: procedures,
@@ -21,6 +23,7 @@ export const addProcedures = (procedures) => {
 };
 
 export const addCooktime = (cook_time) => {
+  console.log("forms", cook_time)
   return {
     type: ADD_COOKTIME,
     payload: cook_time,
@@ -28,6 +31,7 @@ export const addCooktime = (cook_time) => {
 };
 
 export const addCategory = (category) => {
+  console.log("forms", category)
   return {
     type: ADD_CATEGORY,
     payload: category,

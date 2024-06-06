@@ -16,11 +16,13 @@ export default function Register() {
 
   const dispatch = useDispatch();
 
+  console.log(token)
+
   useEffect(() => {
     if (token) {
       navigate("/dashboard");
     }
-  }, [token]);
+  }, [token, navigate]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();

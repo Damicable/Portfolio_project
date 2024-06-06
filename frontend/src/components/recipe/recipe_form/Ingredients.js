@@ -24,7 +24,7 @@ export default function Ingredients({ editMode, recipe }) {
 
   useEffect(() => {
     dispatch(addIngredients(ingredients));
-  }, [ingredients]);
+  }, [ingredients, dispatch]);
 
   const handleClick = () => {
     const value = textInput.current.value;

@@ -26,6 +26,7 @@ export default function (state = initialState, action) {
         isLoading: true,
       };
     case USER_LOADED:
+      console.log("User Reducer", action.payload)
       return {
         ...state,
         isLoading: false,
