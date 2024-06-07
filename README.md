@@ -18,7 +18,7 @@ Frontend: React, javwscript and CSS
 ### TIME MANAGEMENT: we  identified "time management" as a potential challenge. This is a common issue in project development, especially when working within a tight deadline like ours
 We hope that upon completion of this project, it would be mind blowing.
 
-##Thank you.
+Thank you.
 
 
 
