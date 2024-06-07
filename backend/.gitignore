@@ -4,6 +4,6 @@ __pycache__
 db.py
 table.py
 .env
-create_db.py
+create_db.sql
 create_db.sql
 migrations

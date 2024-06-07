@@ -9,7 +9,7 @@ export default function PictureUpload() {
 
   useEffect(() => {
     dispatch(addPicture(picture));
-  }, [picture]);
+  }, [picture, dispatch]);
 
   return (
     <div>

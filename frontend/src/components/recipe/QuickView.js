@@ -162,7 +162,7 @@ export default function QuickView({ open, setOpen, id }) {
 
                         <div className="mt-6">
                           <Link
-                            to={`/recipes/${id}/full`}
+                            to={`/recipe/${id}`}
                             className="font-medium text-teal-600 hover:text-teal-500"
                           >
                             <button

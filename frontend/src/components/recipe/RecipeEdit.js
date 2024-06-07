@@ -12,6 +12,8 @@ export default function RecipeEdit() {
 
   const { recipes, is_loading } = useSelector((state) => state.recipes);
 
+  console.log("Edit", recipes, "id", id)
+
   const recipe = recipes.filter((recipe) => recipe.id === parseInt(id));
 
   const handleFormSubmit = (formData) => {

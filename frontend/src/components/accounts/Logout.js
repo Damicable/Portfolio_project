@@ -4,20 +4,23 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationIcon } from "@heroicons/react/outline";
 
 import { logout } from "../../redux/actions/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Logout({ modal, setModal }) {
   const cancelButtonRef = useRef(null);
 
   const { token } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
+  const navigate = useNavigate
 
   console.log(token)
 
   useEffect(() => {
     if (!token) {
       setModal(false);
+      navigate("/");
     }
-  }, [token]);
+  }, [token, setModal, navigate]);
 
   const handleLogoutClick = () => {
     dispatch(

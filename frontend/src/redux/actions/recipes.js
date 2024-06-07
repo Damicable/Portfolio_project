@@ -60,7 +60,8 @@ export const createRecipe = (formData) => (dispatch, getState) => {
   dispatch({ type: RECIPE_LOADING });
 
   axiosInstance
-    .post("/recipes/create/", formData, tokenConfig(getState))
+    .post("/recipes/create", formData, tokenConfig(getState))
+    console.log(formData)
     .then((res) => {
       dispatch({
         type: CREATE_RECIPE,
@@ -79,7 +80,7 @@ export const editRecipe = (id, formData) => (dispatch, getState) => {
   dispatch({ type: RECIPE_LOADING });
 
   axiosInstance
-    .patch(`/recipes/${id}/`, formData, tokenConfig(getState))
+    .patch(`/recipes/${id}`, formData, tokenConfig(getState))
     .then((res) => {
       dispatch({
         type: EDIT_RECIPE,
@@ -98,8 +99,9 @@ export const deleteRecipe = (id) => (dispatch, getState) => {
   dispatch({ type: RECIPE_LOADING });
 
   axiosInstance
-    .delete(`/recipes/${id}/`, tokenConfig(getState))
+    .delete(`/recipes/${id}`, tokenConfig(getState))
     .then((res) => {
+      console.log(res.data)
       dispatch({
         type: DELETE_RECIPE,
         payload: res.data,

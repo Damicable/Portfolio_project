@@ -11,7 +11,7 @@ export default function SavedRecipes() {
 
   useEffect(() => {
     dispatch(getSavedRecipes(user.id));
-  }, []);
+  }, [dispatch, user.id]);
 
   if (!savedRecipes)
     return (

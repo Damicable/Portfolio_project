@@ -28,7 +28,7 @@ export default function Header() {
       dispatch(loadUser());
       dispatch(getAvatar());
     }
-  }, [token]);
+  }, [token, dispatch]);
 
   return (
     <>

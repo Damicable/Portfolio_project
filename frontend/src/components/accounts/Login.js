@@ -6,10 +6,10 @@ import { login } from "../../redux/actions/auth";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { token } = useSelector((state) => state.auth);
+  const token = useSelector((state) => state.auth.token);
 
   const dispatch = useDispatch();
 
@@ -17,15 +17,16 @@ export default function Login() {
 
   useEffect(() => {
     if (token) {
+      console.log(token)
       navigate("/dashboard");
     }
-  }, [token]);
+  }, [token, navigate]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     dispatch(
       login({
-        email: email,
+        username: username,
         password: password,
       })
     );
@@ -44,17 +45,17 @@ export default function Login() {
             <div className="rounded-md shadow-sm -space-y-px">
               <div>
                 <label htmlFor="email-address" className="sr-only">
-                  Email address
+                  Username
                 </label>
                 <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
+                  id="username"
+                  name="username"
+                  type="username"
+                  autoComplete="username"
                   required
                   className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-[#D42B2B] focus:border-[#D42B2B] focus:z-10 sm:text-sm"
-                  placeholder="Email address"
-                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Username"
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </div>
               <div>

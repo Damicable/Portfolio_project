@@ -89,7 +89,7 @@ export default function Dashboard() {
                 </Transition.Child>
                 <div className="px-4">
                   <Link to="/" className="font-normal text-xl text-[#FFDFDF]">
-                    Mesob Recipe
+                    CuisineConnect
                   </Link>
                 </div>
                 <nav
@@ -148,7 +148,7 @@ export default function Dashboard() {
           <div className="flex flex-col flex-grow bg-[#D42B2B] pt-5 pb-4 overflow-y-auto">
             <div className="px-4">
               <Link to="/" className="font-normal text-xl text-[#FFDFDF]">
-                Mesob Recipe
+                CuisineConnect
               </Link>
             </div>
             <nav

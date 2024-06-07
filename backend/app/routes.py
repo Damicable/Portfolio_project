@@ -44,7 +44,12 @@ def users_register():
         return jsonify(message="Email is already taken"), 400
     
     new_user = add_new_user(newUser)
-    return jsonify(new_user), 201
+    access_token = create_access_token(identity=new_user["username"])
+    response = jsonify(data=new_user,
+                       access_token=access_token,
+                       msg='Register Successful')
+    set_access_cookies(response, access_token)
+    return response, 201
         
 
 @app.route("/api/users/login", methods=["POST"])
@@ -60,13 +65,14 @@ def user_login():
         set_access_cookies(response, access_token)
         return response, 200
     else:
-        return jsonify({"msg": "Email or password is incorrect"}), 401
+        return jsonify({"msg": "Username or Password is incorrect"}), 401
 
 
 @app.route("/api/user")
 @jwt_required()
 def user_profile():
     username = get_jwt_identity()
+    print(username)
     return jsonify(User.query.filter(User.username == username).first().to_dict())
 
 
@@ -257,7 +263,7 @@ def recipes():
         return Response(status=400)
     else:
         new_recipe = add_full_recipe(newRecipeFull, user.id)
-        return jsonify(message=f'New Recipe created {new_recipe.name}, id {new_recipe.id}'), 201
+        return jsonify(msg=f'New Recipe created {new_recipe.name}, id {new_recipe.id}'), 201
 
 
 @app.route("/api/recipes/<int:num>", methods=["GET"])
@@ -273,7 +279,9 @@ def recipes_n(num):
 @jwt_required()
 def recipes_n_path_delete(num):
     r = get_recipe_by_id(num)
+    print(r)
     username = get_jwt_identity()
+    print(username)
     user = User.query.filter(User.username == username).first()
     if r is None or user is None or user.username != r.contributor.username:
         abort(404)

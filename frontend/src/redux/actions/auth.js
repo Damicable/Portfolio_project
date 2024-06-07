@@ -59,7 +59,7 @@ export const register =
   };
 
 export const login =
-  ({ email, password }) =>
+  ({ username, password }) =>
   (dispatch) => {
     const config = {
       headers: {
@@ -67,7 +67,7 @@ export const login =
       },
     };
 
-    const body = JSON.stringify({ email, password });
+    const body = JSON.stringify({ username, password });
 
     axiosInstance
       .post("/users/login/", body, config)
@@ -122,7 +122,7 @@ export const tokenConfig = (getState) => {
   };
 
   if (token) {
-    config.headers["Authorization"] = `Bearer ${token.access}`;
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
 
   return config;

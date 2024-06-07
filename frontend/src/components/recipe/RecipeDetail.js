@@ -36,7 +36,7 @@ export default function RecipeDetail() {
 
   useEffect(() => {
     dispatch(getDetailRecipe(id));
-  }, []);
+  }, [id, dispatch]);
 
   if (!detailRecipe || detailRecipe.length === 0)
     return (
@@ -46,9 +46,13 @@ export default function RecipeDetail() {
         </p>
       </div>
     );
-  console.log("recipeDetail", detailRecipe)
-  const procedures = JSON.parse(detailRecipe.procedure);
-  const ingredients = JSON.parse(detailRecipe.ingredients);
+
+  
+  let procedures = detailRecipe.recipe_steps;
+  const ingredients = []
+  detailRecipe.recipe_ingredients.forEach((ingredient) => {
+    ingredients.push(`${ingredient.english_name} ${ingredient.quantity} ${ingredient.unit}`)
+  });
 
   const recipe = {
     details: [
@@ -73,7 +77,7 @@ export default function RecipeDetail() {
                 <div className="w-full aspect-w-1 aspect-h-1">
                   <div>
                     <img
-                      src={detailRecipe.picture}
+                      src={detailRecipe.header_image}
                       alt=""
                       className="w-full h-full object-center object-cover sm:rounded-lg"
                     />
@@ -85,10 +89,10 @@ export default function RecipeDetail() {
               <div className="mt-10 px-4 sm:px-0 sm:mt-16 lg:mt-0">
                 <div className="flex sm:flex-col1">
                   <h1 className="flex text-3xl font-extrabold tracking-tight text-gray-900">
-                    {detailRecipe.title}
+                    {detailRecipe.name}
                   </h1>
 
-                  <Link to={`/recipes/${id}/edit/`}>
+                  <Link to={`/recipes/${id}/edit`}>
                     <button
                       type="button"
                       className="group ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"
