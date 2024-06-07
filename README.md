@@ -3,7 +3,7 @@ The Recipe sharing app
 
 ## INTRODUCTION
 Cuisine Connect is a simulation of an online recipe sharing  platform  that is designed for nutritionist innovative display thereby adding more flavour to food choices.
-OBJECTIVES
+## OBJECTIVES
 Creative Expression: For many, cooking is a form of creative expression. Sharing recipes provides an outlet for creativity and an opportunity to showcase one's culinary creations.
 Community Building: Online recipe platforms foster communities of food enthusiasts who share similar interests. These communities can provide support, feedback, and a sense of belonging for their members
 Knowledge Sharing: Online recipe sharing helps people exchange culinary knowledge and techniques. It allows cooks to learn from each other and discover new recipes, cuisines, and cooking methods.
