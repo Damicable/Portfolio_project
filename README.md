@@ -10,14 +10,14 @@ Knowledge Sharing: Online recipe sharing helps people exchange culinary knowledg
 Cultural Exchange: Recipe sharing can be a form of cultural exchange, allowing people to explore different cuisines and traditions from around the world. It can also help preserve and promote culinary heritage.
 Preservation of Recipes: By sharing recipes online, cooks can preserve their family recipes and ensure they are passed down to future generations or shared with a wider audience.
 
-TECHNOLOGIES USED
+## TECHNOLOGIES USED
 Backend:  Python(Flask)
 Frontend: React, javwscript and CSS
 
-CHALLENGES
-TIME MANAGEMENT: we  identified "time management" as a potential challenge. This is a common issue in project development, especially when working within a tight deadline like ours
+## CHALLENGES:
+### TIME MANAGEMENT: we  identified "time management" as a potential challenge. This is a common issue in project development, especially when working within a tight deadline like ours
 We hope that upon completion of this project, it would be mind blowing.
-Thank you.
+###Thank you.
 
 
 
