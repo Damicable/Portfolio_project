@@ -1,16 +1,7 @@
-CuisineConnect
+# CuisineConnect:
+The Recipe sharing app
 
-Team Members
-Amine Ladraa
-Amineladraa67@gmail.com
-Harp Fanawopo
-walesii19@gmail.com
-Alokan Olamide
-alokanolamide@gmail.com
-Obidiegwu Ann
-annobidiegwu@gmail.com
-
-INTRODUCTION
+## INTRODUCTION
 Cuisine Connect is a simulation of an online recipe sharing  platform  that is designed for nutritionist innovative display thereby adding more flavour to food choices.
 OBJECTIVES
 Creative Expression: For many, cooking is a form of creative expression. Sharing recipes provides an outlet for creativity and an opportunity to showcase one's culinary creations.
