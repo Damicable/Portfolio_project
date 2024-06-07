@@ -10,7 +10,7 @@ export default function Recipes() {
   console.log(recipes)
   useEffect(() => {
     dispatch(getRecipes());
-  }, []);
+  }, [dispatch]);
 
   if (!recipes || recipes.length === 0)
     return (

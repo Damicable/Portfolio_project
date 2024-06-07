@@ -103,7 +103,7 @@ export const getUserRecipes = (username) => (dispatch, getState) => {
       console.log(res.data)
       dispatch({
         type: GET_USER_RECIPES,
-        payload: res.data,
+        payload: res.data.recipes,
       });
     })
     .catch((err) => {

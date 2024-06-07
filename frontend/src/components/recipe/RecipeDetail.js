@@ -92,7 +92,7 @@ export default function RecipeDetail() {
                     {detailRecipe.name}
                   </h1>
 
-                  <Link to={`/recipes/${id}/edit/`}>
+                  <Link to={`/recipes/${id}/edit`}>
                     <button
                       type="button"
                       className="group ml-4 py-3 px-3 rounded-md flex items-center justify-center text-gray-400 hover:bg-gray-100 hover:text-gray-500"

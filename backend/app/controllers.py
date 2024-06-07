@@ -100,6 +100,7 @@ def add_new_user(new_user: dict):
 
 
 def get_recipe_by_id(id: int) -> Recipe:
+    print(id)
     return Recipe.query.get(id)
 
 

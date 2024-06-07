@@ -39,6 +39,7 @@ export const addCategory = (category) => {
 };
 
 export const addPicture = (picture) => {
+  console.log("forms", picture)
   return {
     type: ADD_PICTURE,
     payload: picture,
